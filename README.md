@@ -7,3 +7,5 @@ Inicie con la capa de negocio, inicie y termine con el archivo de Cliente.cs, pa
 06/10 - Termine con Reserva.cs
 
 07/10 - Segui con el README e hice el Menú, calcule mal mis tiempos y me pelie con el código
+
+08/10 - Me confundi de ZIP
