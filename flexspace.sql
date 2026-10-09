@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2026 at 02:55 AM
+-- Generation Time: Oct 09, 2026 at 02:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -31,9 +31,21 @@ CREATE TABLE `cliente` (
   `Id` int(11) NOT NULL,
   `Nombre` varchar(25) NOT NULL,
   `Email` varchar(125) NOT NULL,
-  `TipoCliente` varchar(7) NOT NULL,
+  `TipoCliente` varchar(10) NOT NULL,
   `SancionesActivas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cliente`
+--
+
+INSERT INTO `cliente` (`Id`, `Nombre`, `Email`, `TipoCliente`, `SancionesActivas`) VALUES
+(1, 'Maria Lopez', 'lopezzz@gmail.com', 'VIP', 0),
+(2, 'Juan Perez', 'juanperez@gmail.com', 'Estandar', 0),
+(3, 'Carlos Gomez', 'gomezcarlo34@gmail.com', 'Estandar', 1),
+(4, 'Pedro Martinez', 'pedrom@gmail.com', 'VIP', 3),
+(5, 'Lucia Fernandez', 'miauchifer@gmail.com', 'VIP', 2),
+(6, 'Sofia Ramirez', 'sofitay@gmail.com', 'VIP', 4);
 
 -- --------------------------------------------------------
 
@@ -48,6 +60,18 @@ CREATE TABLE `puesto` (
   `TarifaBaseXHora` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `puesto`
+--
+
+INSERT INTO `puesto` (`Id`, `Codigo`, `TipoPuesto`, `TarifaBaseXHora`) VALUES
+(1, 'P001', 'Escritorio Individual', 2000),
+(2, 'P002', 'Escritorio Individual', 2500),
+(3, 'P003', 'Sala Reuniones', 6000),
+(4, 'P004', 'Sala Reuniones', 8000),
+(5, 'P005', 'Cabina Privada', 4000),
+(6, 'P006', 'Cabina Privada', 5000);
+
 -- --------------------------------------------------------
 
 --
@@ -55,7 +79,7 @@ CREATE TABLE `puesto` (
 --
 
 CREATE TABLE `reserva` (
-  `Id` int(11) DEFAULT NULL,
+  `Id` int(11) NOT NULL,
   `ClienteId` int(11) NOT NULL,
   `PuestoId` int(11) NOT NULL,
   `FechaInicio` datetime NOT NULL,
@@ -63,6 +87,15 @@ CREATE TABLE `reserva` (
   `Estado` varchar(12) NOT NULL,
   `CostoTotal` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reserva`
+--
+
+INSERT INTO `reserva` (`Id`, `ClienteId`, `PuestoId`, `FechaInicio`, `FechaFin`, `Estado`, `CostoTotal`) VALUES
+(1, 1, 3, '2026-10-09 18:50:00', '2026-10-09 20:00:00', 'Cancelada', 6650),
+(2, 5, 1, '2026-10-08 21:02:00', '2026-10-08 22:10:00', 'Confirmada', 2720),
+(3, 1, 1, '2026-10-22 20:30:00', '2026-10-22 22:30:00', 'Confirmada', 3800);
 
 --
 -- Indexes for dumped tables
@@ -84,6 +117,7 @@ ALTER TABLE `puesto`
 -- Indexes for table `reserva`
 --
 ALTER TABLE `reserva`
+  ADD PRIMARY KEY (`Id`),
   ADD KEY `ClienteId` (`ClienteId`),
   ADD KEY `PuestoId` (`PuestoId`);
 
@@ -95,13 +129,19 @@ ALTER TABLE `reserva`
 -- AUTO_INCREMENT for table `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `puesto`
 --
 ALTER TABLE `puesto`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `reserva`
+--
+ALTER TABLE `reserva`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
